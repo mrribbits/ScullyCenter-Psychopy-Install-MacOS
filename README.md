@@ -37,12 +37,3 @@ just lets the new copy overwrite it; for conda, declining reuses the existing en
   default-channel Terms-of-Service gate and large-org licensing.
 - After a **conda** install, open a new terminal and `conda activate psychopy` (the script
   runs `conda init` for zsh and bash), or run experiments directly with the env's Python.
-- **No hardware APIs.** This installer no longer touches the EyeLink (`pylink`) or VPixx
-  (`pypixxlib`) Python APIs — install those separately per the vendor instructions, e.g. via
-  PsychoPy ▸ Tools ▸ Plugin/packages manager, or the vendor docs (sr-research.com /
-  docs.vpixx.com). Note VPixx's `libdpx` must match your Mac's architecture (arm64 vs Intel).
-
-## Non-interactive? 
-
-This version is intentionally prompt-driven. The Windows installer (`Install-PsychoPy.ps1`)
-remains the fuller, flag-driven one with facility logic and the API wiring.
