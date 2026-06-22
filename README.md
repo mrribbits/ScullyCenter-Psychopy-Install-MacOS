@@ -1,2 +1,48 @@
-# ScullyCenter-Psychopy-Install-MacOS
-Bash script for researchers to easily install Psychopy onto their Macs. The installation will provide the choice between standalone Psychopy, Psychopy Studio, or a conda environment installation.  
+# PsychoPy on macOS — simple installer
+
+`Install-PsychoPy-macOS.sh` is a small interactive installer. It asks two things —
+**what** to install and **which version** — and installs it. If a matching install
+already exists, it offers to delete it first.
+
+## Run it
+
+Open Terminal, `cd` to the folder with the script, then:
+
+```bash
+bash Install-PsychoPy-macOS.sh
+```
+
+Run it directly (not piped) since it's interactive.
+
+## What it asks
+
+1. **What to install:**
+   - **PsychoPy Studio** — the newer Electron app (`PsychoPy_Studio_<ver>.dmg`).
+   - **PsychoPy Standalone** — the classic app (`StandalonePsychoPy-<ver>-macOS-<arch>-<pyver>.dmg`).
+   - **PsychoPy in a Conda environment** — a per-user `psychopy` env; installs a per-user
+     Miniconda first if you don't already have conda (no admin needed).
+2. **Which version** — type one like `2026.2.0`, or leave blank for the latest.
+
+If a matching install is found (the Studio app, the Standalone app, or the `psychopy`
+conda env), you're asked whether to delete it before installing. For the apps, declining
+just lets the new copy overwrite it; for conda, declining reuses the existing env.
+
+## Notes
+
+- **No admin needed for conda.** Copying an app into `/Applications` may prompt for your
+  password if that folder isn't user-writable.
+- **Architecture-aware.** On Apple Silicon the Standalone picks the `arm64` build and conda
+  installs an `arm64` Miniconda; on Intel it picks `x86_64`. Studio's macOS dmg is universal.
+- **Conda uses conda-forge** (`--override-channels`, with `pip` added) to avoid Anaconda's
+  default-channel Terms-of-Service gate and large-org licensing.
+- After a **conda** install, open a new terminal and `conda activate psychopy` (the script
+  runs `conda init` for zsh and bash), or run experiments directly with the env's Python.
+- **No hardware APIs.** This installer no longer touches the EyeLink (`pylink`) or VPixx
+  (`pypixxlib`) Python APIs — install those separately per the vendor instructions, e.g. via
+  PsychoPy ▸ Tools ▸ Plugin/packages manager, or the vendor docs (sr-research.com /
+  docs.vpixx.com). Note VPixx's `libdpx` must match your Mac's architecture (arm64 vs Intel).
+
+## Non-interactive? 
+
+This version is intentionally prompt-driven. The Windows installer (`Install-PsychoPy.ps1`)
+remains the fuller, flag-driven one with facility logic and the API wiring.
